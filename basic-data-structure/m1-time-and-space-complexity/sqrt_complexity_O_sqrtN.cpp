@@ -7,7 +7,12 @@ int main()
     cin >> n;
     for (int i = 1; i <= sqrt(n); i++)
     {
-        cout << i << endl;
+        if (n % i == 0)
+        {
+            cout << i << " " << n / i << " ";
+        }
     }
     return 0;
 }
+
+// Time complexity O(sqrt(n))
