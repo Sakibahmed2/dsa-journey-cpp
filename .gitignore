@@ -1,0 +1,16 @@
+# C++ executable files
+*.exe
+
+# Object files
+*.o
+*.obj
+
+# Build folders
+build/
+bin/
+
+# Debug files
+*.out
+
+# VS Code files
+.vscode/
