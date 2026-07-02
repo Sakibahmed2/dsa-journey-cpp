@@ -41,18 +41,19 @@ void insert_at_tail(Node *&head, Node *&tail, int val)
 
 int main()
 {
-    Node *head = new Node(10);
-    Node *a = new Node(20);
-    Node *tail = new Node(30);
+    Node *head = NULL;
+    Node *tail = NULL;
 
-    head->next = a;
-    a->next = tail;
+    int n;
+    cin >> n;
+    while (n--)
+    {
+        int x;
+        cin >> x;
+        insert_at_tail(head, tail, x);
+    }
 
-    insert_at_tail(head, tail, 40);
-    insert_at_tail(head, tail, 50);
-    insert_at_tail(head, tail, 60);
     print_linked_list(head);
-    cout << "Tail = " << tail->value;
 
     return 0;
 }
