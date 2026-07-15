@@ -13,6 +13,18 @@ int main()
     // list<int> l2(arr, arr + 4);
     list<int> l2(v.begin(), v.end());
 
+    // l2.clear();
+
+    // if (l2.empty())
+    // {
+    //     cout << "Empty" << endl;
+    // }
+    // else
+    // {
+    //     cout << "Not empty" << endl;
+    // }
+
+    // l2.resize(2);
 
     for (int x : l2)
     {
