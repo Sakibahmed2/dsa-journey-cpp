@@ -34,7 +34,13 @@ public:
 
 int main()
 {
-    
-    
+    my_stack st;
+
+    st.push(10);
+    st.push(20);
+    st.push(30);
+
+    cout << st.top() << endl;
+
     return 0;
 }
