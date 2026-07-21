@@ -6,11 +6,13 @@ class Node
 public:
     int value;
     Node *next;
+    Node *prev;
 
     Node(int value)
     {
         this->value = value;
         this->next = NULL;
+        this->prev = NULL;
     }
 };
 
@@ -32,6 +34,7 @@ public:
             return;
         }
         tail->next = newnode;
+        newnode->prev = tail;
         tail = newnode;
     }
 
@@ -41,10 +44,12 @@ public:
         Node *deletenode = head;
         head = head->next;
         delete deletenode;
-        if(head == NULL)
+        if (head == NULL)
         {
             tail = NULL;
+            return;
         }
+        head->prev = NULL;
     }
 
     int front() // O(1)
