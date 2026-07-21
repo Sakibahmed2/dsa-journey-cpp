@@ -36,11 +36,20 @@ int main()
 {
     my_stack st;
 
-    st.push(10);
-    st.push(20);
-    st.push(30);
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        int x;
+        cin >> x;
+        st.push(x);
+    }
 
-    cout << st.top() << endl;
+    while (!st.empty())
+    {
+        cout << st.top() << " ";
+        st.pop();
+    }
 
     return 0;
 }
