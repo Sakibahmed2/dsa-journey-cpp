@@ -8,7 +8,7 @@ public:
 
     void push(int val) // O(1)
     {
-       l.push_back(val);
+        l.push_back(val);
     }
 
     void pop() // O(1)
