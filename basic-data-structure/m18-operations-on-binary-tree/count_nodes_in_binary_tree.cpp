@@ -64,22 +64,59 @@ Node *input_tree()
     return root;
 };
 
-int cnt_node(Node* root)
+// Count usin level order
+int cnt_node(Node *root)
 {
-    queue<Node*> q;
+    int cnt = 0;
+    queue<Node *> q;
     q.push(root);
 
     while (!q.empty())
     {
-    qq
+        // 1. Ber kore anaa
+        Node *f = q.front();
+        q.pop();
+
+        // 2. Oi node niyee kaj
+        cnt++;
+
+        // 3. children push
+        if (f->left)
+        {
+            q.push(f->left);
+        }
+        if (f->right)
+        {
+            q.push(f->right);
+        }
     }
-    
+
+    return cnt;
+}
+
+// Count using recursion
+int cnt_node_recursion(Node *root)
+{
+    if (root == NULL)
+    {
+        return 0;
+    }
+
+    int l = cnt_node_recursion(root->left);
+    int r = cnt_node_recursion(root->right);
+
+    return l + r + 1;
 }
 
 int main()
 {
 
-    Node* root = input_tree();
+    Node *root = input_tree();
+
+    // int ans = cnt_node(root);
+    int ans = cnt_node_recursion(root);
+
+    cout << ans << endl;
 
     return 0;
 }
