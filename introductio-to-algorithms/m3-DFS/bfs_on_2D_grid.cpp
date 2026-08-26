@@ -3,6 +3,7 @@ using namespace std;
 
 char grid[101][101];
 bool vis[101][101];
+int level[101][101];
 int n, m;
 
 vector<pair<int, int>> d = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
@@ -19,6 +20,7 @@ void bfs(int si, int sj)
     queue<pair<int, int>> q;
     q.push({si, sj});
     vis[si][sj] = true;
+    level[si][sj] = 0;
 
     while (!q.empty())
     {
@@ -28,17 +30,18 @@ void bfs(int si, int sj)
         int pair_i = par.first;
         int pair_j = par.second;
 
-        cout << pair_i << " " << pair_j << endl;
+        // cout << pair_i << " " << pair_j << endl;
 
         for (int i = 0; i < 4; i++)
         {
             int ci = pair_i + d[i].first;
             int cj = pair_j + d[i].second;
 
-            if (is_valid(ci, cj) && !vis[ci][cj])
+            if (is_valid(ci, cj) && !vis[ci][cj] && grid[ci][cj] == '.')
             {
                 q.push({ci, cj});
                 vis[ci][cj] = true;
+                level[ci][cj] = level[pair_i][pair_j] + 1;
             }
         }
     }
@@ -56,12 +59,15 @@ int main()
         }
     }
 
-    int si, sj;
-    cin >> si >> sj;
+    int si, sj, di, dj;
+    cin >> si >> sj >> di >> dj;
 
     memset(vis, false, sizeof(vis));
+    memset(level, -1, sizeof(level));
 
     bfs(si, sj);
+
+    cout << level[di][dj] << endl;
 
     return 0;
 }
