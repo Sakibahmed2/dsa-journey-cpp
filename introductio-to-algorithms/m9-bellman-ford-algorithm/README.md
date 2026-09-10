@@ -116,56 +116,87 @@ if any edge relaxes:
 #include <bits/stdc++.h>
 using namespace std;
 
-class Edge {
+class Edge
+{
 public:
-    int u, v, w;
-    Edge(int u, int v, int w) {
-        this->u = u;
-        this->v = v;
-        this->w = w;
+    int a, b, c;
+    Edge(int a, int b, int c)
+    {
+        this->a = a;
+        this->b = b;
+        this->c = c;
     }
 };
 
-const int INF = 1e9;
+int n, e;
+int dis[1005];
+vector<Edge> edge_list;
 
-int main() {
-    int V = 4;
-    vector<Edge> edgeList; // all graph edges
+void bellman_ford()
+{
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (auto ed : edge_list)
+        {
+            int a, b, c;
+            a = ed.a;
+            b = ed.b;
+            c = ed.c;
 
-    edgeList.push_back(Edge(0, 1, 5));
-    edgeList.push_back(Edge(0, 2, 10));
-    edgeList.push_back(Edge(1, 3, 3));
-    edgeList.push_back(Edge(2, 1, -4));
-    edgeList.push_back(Edge(3, 2, 2));
-
-    vector<int> dist(V, INF);
-    dist[0] = 0; // source = 0
-
-    // Pass 1 to V-1 : relax all edges
-    for (int i = 1; i <= V - 1; i++) {
-        for (Edge ed : edgeList) {
-            if (dist[ed.u] != INF && dist[ed.u] + ed.w < dist[ed.v]) {
-                dist[ed.v] = dist[ed.u] + ed.w;
+            if (dis[a] != INT_MAX && dis[a] + c < dis[b])
+            {
+                dis[b] = dis[a] + c;
             }
         }
     }
 
-    // Pass V : negative cycle detection
-    bool hasNegativeCycle = false;
-    for (Edge ed : edgeList) {
-        if (dist[ed.u] != INF && dist[ed.u] + ed.w < dist[ed.v]) {
-            hasNegativeCycle = true;
+    bool flag = false;
+    for (auto ed : edge_list)
+    {
+        int a, b, c;
+        a = ed.a;
+        b = ed.b;
+        c = ed.c;
+
+        if (dis[a] != INT_MAX && dis[a] + c < dis[b])
+        {
+            flag = true;
             break;
         }
     }
 
-    if (hasNegativeCycle) {
-        cout << "Negative cycle exists! No shortest path.\n";
-    } else {
-        for (int i = 0; i < V; i++) {
-            cout << "dist[" << i << "] = " << dist[i] << "\n";
+    if (flag)
+        cout << "Negative weighted cycle detected" << endl;
+    else
+    {
+        cout << "No cycle detected" << endl;
+        for (int i = 0; i < n; i++)
+        {
+            cout << i << " -> " << dis[i] << endl;
         }
     }
+}
+
+int main()
+{
+
+    cin >> n >> e;
+
+    while (e--)
+    {
+        int a, b, c;
+        cin >> a >> b >> c;
+        edge_list.push_back(Edge(a, b, c));
+        // edge_list.push_back(Edge(b, a, c)); // If undirected graph
+    }
+
+    for (int i = 0; i < n; i++)
+        dis[i] = INT_MAX;
+
+    dis[0] = 0;
+
+    bellman_ford();
+
     return 0;
 }
 ```
