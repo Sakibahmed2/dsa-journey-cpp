@@ -1,10 +1,10 @@
 #include <bits/stdc++.h>
-using namespace std;
+using namespace std; // O(2^N)
 
 int fibo(int n)
 {
-    if (n == 1)
-        return 1;
+    if (n < 2)
+        return n;
     return fibo(n - 1) + fibo(n - 2);
 }
 
